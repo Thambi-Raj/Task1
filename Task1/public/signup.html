@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        .mobile-inp {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+        #councode{
+            width: 80px;
+            height: 35px;
+            margin-top:6px;
+        }
+        #mobile{
+            width:410px;
+        }
+        .digit-pass{
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+        .digit-pass input,.digit-pass-label label{
+            width:240px;
+        }
+        .digit-pass-label{
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+        }
+        #user{
+            display: none;
+        }
+        #rela{
+            position: absolute;
+            margin-top: -5px;
+        }
+        #warn{
+            display: none;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-form">
+        <p id="warn">PLease fill All Details</p>
+        <h2>Sign Up</h2>
+        <form action="" method="POST" id="form1">
+            <label for="username" id="uname">Username:</label>
+            <input type="text" id="username" name="username" required onkeyup="remove()">
+            <div id="rela">
+            </div>
+            <label for="username">Dob</label>   
+            <input type="date" id="bob" name="dob" required>
+            <label for="email" id="em">Email:</label>
+            <input type="email" id="email" name="email"  onkeyup="removema()">
+            <label for="username" id="phone">PhoneNumber:</label>
+            <div class="mobile-inp">
+                <select id="councode" name="countryCode">
+                    <option value="+1">+1 (US)</option>
+                    <option value="+44">+44 (UK)</option>
+                    <option value="+91">+91 (IN)</option>
+                    <option value="+61">+61 (AU)</option>
+                    <option value="+49">+49 (DE)</option>
+                    <option value="+33">+33 (FR)</option>
+                    <option value="+81">+81 (JP)</option>
+                    <option value="+86">+86 (CN)</option>
+                </select>
+                <input type="text" id="mobile" placeholder="7708179320" minlength="10" maxlength="10" onblur="mobile_check()" >
+            </div>
+           
+            <div class="digit-pass-label">
+                <label id="pin" for="pin">Pin</label>
+                <label for="confirm-pin" id="cp">Confirm pin</label>
+            </div>
+            <div class="digit-pass">
+                <input type="password" id="digitpass"  maxlength="10" minlength="4" onkeyup="check_alpha()">
+                <input type="password" id="digitpass1"  >
+            </div>
+            <div class="digit-pass-label">
+                <label id="pass" for="pin">Password</label>
+                <label for="confirm-pin" id="p1">Confirm pasword</label>
+            </div>
+            <div class="digit-pass">
+                <input type="password" id="pass8"  maxlength="100" minlength="8" onkeyup="isStrong()">
+                <input type="password" id="pass9"   >
+            </div>
+            <p id="passw">Password Consist of LowerCase,UpperCase,Special,Numeric</p>
+           
+           <input type="" id="ok" value="Sign Up" onclick="check_pin()">
+        </form>
+        <br>
+        <a href="login.html">Already Signed Click Me</a>
+    </div>
+</body>
+<script>
+function check_alpha(){
+      var input=document.getElementById("digitpass").value+"";
+      var check=input[input.length-1];
+      console.log(input);
+      if(check>='0' && check <='9'){
+        document.getElementById('cp').innerHTML='Pin'
+          document.getElementById('cp').style.color='black'; 
+      }
+      else if (input.length!=0){
+          document.getElementById('cp').innerHTML='Please enter a Numeric Value'
+          document.getElementById('cp').style.color='red';
+         const y = input.toString().split('').slice(0, -1).join('')
+         const newNum = Number(y)
+         document.getElementById("digitpass").value=newNum;
+         console.log(newNum);
+         console.log(sub+"disi");
+      }
+      
+}
+function check_pin(){
+    var sub=0;
+      var pin=document.getElementById('digitpass').value;
+      var pin2=document.getElementById('digitpass1').value;
+      if(pin!=pin2){
+        document.getElementById('cp').innerHTML='Pin did not match';
+        document.getElementById('cp').style.color='red';
+        document.getElementById('digitpass').value='';
+        document.getElementById('digitpass1').value='';
+        sub=-1;
+        console.log('pin');
+      }
+    var input1=document.getElementById('pass8').value+"";
+    var input2=document.getElementById('pass9').value+"";
+    if(input1!=input2){
+        document.getElementById('p1').innerHTML='Password didnot match';
+        document.getElementById('p1').style.color='red';
+        document.getElementById('pass8').value='';
+        document.getElementById('pass9').value="";
+        sub=-1;
+        console.log(sub+"pass");
+    }
+    var name1=document.getElementById('username').value+"";
+    if(/\d/.test(name1) || /[!@#$%^&*()_+[\]{};':"\\|,.<>?/]/.test(name1)){
+         
+        document.getElementById('uname').innerHTML="Name must be Alphabets Only";
+        document.getElementById('uname').style.color='red'; 
+        sub=-1; 
+        console.log(sub+"name");
+    }   
+    var email=document.getElementById('email').value;
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    var o= emailPattern.test(email);
+    if(o==false && email!=''){
+        document.getElementById('email').innerHTML="Email is invalid";
+        document.getElementById('em').style.color='red';  
+        sub=-1;
+        console.log(sub+"email");
+    }
+    console.log(sub);
+        var name=document.getElementById('username').value;
+        var dob=document.getElementById('bob').value;
+        var email=document.getElementById('email').value;
+        var pin=document.getElementById('digitpass').value;
+        var pass=document.getElementById('pass8').value;
+        var mobile=document.getElementById('mobile').value;
+        console.log(name+" "+dob+" "+email);
+        console.log(pin+" "+pass+" "+mobile);
+        if(name=='' || dob=='' || email=='' || pin=='' || pass=='' || mobile=='' ){
+            document.getElementById('warn').style.display='block';
+            sub=-1;
+            console.log('popopop');
+        }
+    if(sub==0){
+    let data = {};
+    data['name']=name;
+    data['dob']=dob;
+    data['email']=email;
+    data['pin']=pin;
+    data['pass']=pass;
+    data['mobile']=mobile;
+    fetch('signupdata', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({d:data})
+    })
+    .then(response => response.text()).then((response)=>{
+        console.log(response);
+        if(response=="True"){
+            window.location.href='localhost:3000/login.html';
+        }
+        else{
+            document.getElementById('warn').style.display='block';
+            document.getElementById('warn').innerHTML=response;
+        }
+    });;
+
+    }
+
+}
+function mobile_check(){
+    var input=document.getElementById("mobile").value+"";
+      var check=input[input.length-1];
+      console.log(input);
+      if(check>='0' && check <='9'){
+        document.getElementById('phone').innerHTML='PhoneNumber:'
+          document.getElementById('phone').style.color='black'; 
+      }
+      else{
+          document.getElementById('phone').innerHTML='Please enter a Numeric Value'
+          document.getElementById('phone').style.color='red';
+         const y = input.toString().split('').slice(0, -1).join('')
+         const newNum = Number(y)
+         document.getElementById("mobile").value="";
+         console.log(newNum);
+      }
+       document.getElementById('phone').innerHTML="PhoneNumber:";
+       document.getElementById('phone').style.color='black';
+        var get=document.getElementById('mobile').value.length  ;
+    
+      if(get!=10){
+        document.getElementById('phone').innerHTML='Please enter a Valid NUmber'
+             document.getElementById('phone').style.color='red';
+    }
+}
+function isStrong() {
+    document.getElementById('p1').innerHTML='Confirm Password';
+    document.getElementById('p1').style.color='black';
+    const password=document.getElementById('pass8').value;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*()_+[\]{};':"\\|,.<>?/]/.test(password);
+    const hasNumber = /\d/.test(password);
+    var t= hasUpperCase && hasLowerCase && hasSpecialChar && hasNumber;
+    console.log(password);
+    console.log(t);
+    if(t==0){
+        document.getElementById('passw').innerHTML="Your Password is weak";
+    }
+    else if(t==1 && password.length>=8){
+        document.getElementById('passw').innerHTML="Strong password"; 
+        document.getElementById('passw').style.display='none';
+    }
+}
+function remove(){
+    
+    document.getElementById('uname').innerHTML='userName:';
+    document.getElementById('uname').style.color='black';
+}
+function removema(){
+    document.getElementById('em').innerHTML='Email:';
+    document.getElementById('em').style.color='black';
+}
+
+</script>
+</html>

@@ -1,0 +1,45 @@
+
+
+.signup-form {
+    text-align: center;
+    margin-top:15%;
+    margin:15% 40%  auto;
+    width: 500px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    text-align: left;
+    margin-top: 10px;
+}
+
+input {
+    padding: 10px;
+  margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+input[id="ok"] {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 30px;
+    cursor: pointer;
+    width:200px;
+    margin-left: 30%;
+    text-align: center;
+}
+
+input[id="ok"]:hover {
+    background-color: #0056b3;
+}

@@ -39,7 +39,7 @@ app.post('/signupdata',async (req,res)=>{
 })
 
 app.post('/login',async (req,res)=>{
-
+    console.log('In Login');
       let data= await signschema.findOne({$or:[{name:req.body.d.name},{email:req.body.d.name}]});
       let pass=req.body.d.pass;
       if(data.pass==pass || data.pin==pass){
